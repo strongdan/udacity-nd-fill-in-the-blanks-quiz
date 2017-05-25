@@ -77,5 +77,5 @@ def play_game():
         level_selector(first_input)
         level = first_input
         sentence_play(level)
-        
+        play_game()
 play_game()
