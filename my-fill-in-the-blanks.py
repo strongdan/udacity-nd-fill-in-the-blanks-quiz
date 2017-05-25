@@ -10,13 +10,16 @@ sentence_with_blanks = ""
 
 def level_selector(level):
     if level == 1
-        return 'Level is: Easy'
+        print 'Level is: Easy'
     elif level == 2
-        return 'Level is: Medium'
+        print 'Level is: Medium'
     elif level == 3
-        return 'Level is: Hard'
+        print 'Level is: Hard'
+    elif level == 'Q'
+        break
     else:
-        return sentences[level - 1]
+        return 'Please select a level to begin at: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit' 
+    print sentences[level - 1]
 
 def sentence_play(level):
     lvl = level
