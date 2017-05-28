@@ -9,13 +9,13 @@ answers = [['Python','string','list','array'],['dictionary', 'data', '2', '3'],[
 sentence_with_blanks = ""
 
 def level_selector(level):
-    if level == 1
+    if level == 1:
         print 'Level is: Easy'
-    elif level == 2
+    elif level == 2:
         print 'Level is: Medium'
-    elif level == 3
+    elif level == 3:
         print 'Level is: Hard'
-    elif level == 'Q'
+    elif level == 'Q':
         break
     else:
         return 'Please select a level to begin at: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit' 
