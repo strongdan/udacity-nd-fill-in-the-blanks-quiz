@@ -8,38 +8,34 @@ answers = [['Python','string','list','array'],['dictionary', 'data', '2', '3'],[
 
 sentence_with_blanks = ""
 
-def level_selector(): # Immediately after running the program, user is prompted to select a difficulty level from easy / medium / hard
+def level_selector(): 
     """User selected level is printed for user, along with the appropriate sentence
     Args:
         None
     Returns:
-        string: Returns numeric position of level within sentences array
+        string: Returns position of level within sentences array
     """
+    level = input("Please select a level to begin at: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ")
     while True:
-        level = input("Please select a level to begin at: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ")
-        if level == 'q' or level == 'Q':
-            quit()
-            break
         try:
             level = int(level)
             if level == 1:
                 print('Level is: Easy')
-                return 1
+                return level - 1
             elif level == 2:
                 print('Level is: Medium')
-                return 2
+                return level - 1
             elif level == 3:
                 print('Level is: Hard')
-                return 3
+                return level - 1
             else:
-                print("Please enter a valid number...") # catches inputs that except doesn't
+                print("Please enter a valid number") # catches inputs that except doesn't
                 level_selector()
-            return level - 1
         except ValueError: # catches any incorrect inputs not caught above
             print("Invalid input. Please enter a whole number.")
             level_selector()
 
-def sentence_play(level):
+def sentence_play(level, blank=1):
     """Allows user to enter selection and validates user response
     Args:
         level (int): level selected by user
@@ -48,15 +44,18 @@ def sentence_play(level):
     """
     lvl = level
     i = 1
-    while i < 4:
-        if i == 1:
-            blank = 'first'
-        elif i == 2:
-            blank = 'second'
-        elif i == 3:
-            blank = 'third'
-        else:
-            blank = 'fourth'
+    if not blank:
+        blank = 1
+    else:    
+        while i < 4:
+            if i == 1:
+                blank = 'first'
+            elif i == 2:
+                blank = 'second'
+            elif i == 3:
+                blank = 'third'
+            else:
+                blank = 'fourth'
         blank_input = input("What should be substituted in for the " + blank + " blank?\n>> ")
         if correct_answer(lvl, i, blank_input):
              # When player guesses correctly, new prompt shows with correct answer in the
@@ -67,8 +66,8 @@ def sentence_play(level):
         else:
             # When player guesses incorrectly, they are prompted to try again
             print('Not quite. Try again.')
-            play_game()
-    print("Congrats! You got them all right!")
+            sentence_play(blank)
+    all_answers_correct()
     play_game()
 
 def correct_answer(level, blank_number, answer):
@@ -85,6 +84,11 @@ def correct_answer(level, blank_number, answer):
     else:
         return False
 
+def all_answers_correct(level, answer):
+    for word in answers:
+        if correct_answer(level, word, answer):
+            print("Congrats! You got them all right!")
+    
 def display_blank_sentence(level):
     """Validates user response against answers array
     Args:
@@ -93,7 +97,7 @@ def display_blank_sentence(level):
         boolean: Returns true if answer is correct
     """
     try:
-      print(sentences[level - 1])
+      print(sentences[level])
     except IndexError:
       print("requires integer between one and three")
 
@@ -126,7 +130,9 @@ def play_game():
     print("Welcome to the fill-in-the-blanks quiz")
     quit_game = ''
     while quit_game != 'Q' or 'q':
-        level = level_selector() # user selects level
+        # Immediately after running the program, user is prompted
+        # to select a difficulty level from easy / medium / hard
+        level = level_selector()
         display_blank_sentence(level)
         sentence_play(level) # user attempts to fill in blanks
         play_game() # game starts over
