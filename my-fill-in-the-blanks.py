@@ -35,40 +35,39 @@ def level_selector():
             print("Invalid input. Please enter a whole number.")
             level_selector()
 
-def sentence_play(level, blank=1):
+def sentence_play(level):
     """Allows user to enter selection and validates user response
     Args:
         level (int): level selected by user
     Returns:
         Does not return anything
     """
-    lvl = level
     i = 1
-    if not blank:
-        blank = 1
-    else:    
-        while i < 4:
-            if i == 1:
-                blank = 'first'
-            elif i == 2:
-                blank = 'second'
-            elif i == 3:
-                blank = 'third'
-            else:
-                blank = 'fourth'
-        blank_input = input("What should be substituted in for the " + blank + " blank?\n>> ")
-        if correct_answer(lvl, i, blank_input):
+    while i < 5:
+      if i == 1:
+        blank = 'first'
+      elif i == 2:
+        blank = 'second'
+      elif i == 3:
+        blank = 'third'
+      else:
+        blank = 'fourth'
+      blank_input = input("What should be substituted in for the " + blank + " blank?\n>> ")
+      if correct_answer(level, i, blank_input):
              # When player guesses correctly, new prompt shows with correct answer in the
              # previous blank and a new prompt for the next blank
-            display_filled_sentence(lvl, i, blank_input)
-            print("Nice work! You got that one. Now on to the next blank...")
-            i += 1
-        else:
-            # When player guesses incorrectly, they are prompted to try again
-            print('Not quite. Try again.')
-            sentence_play(blank)
-    all_answers_correct()
-    play_game()
+        if i >= 4:
+          print("Great! You got them all correct")
+          break
+        print("Nice work! You got that one. Now on to the next blank...")
+        display_filled_sentence(level, i)
+        i += 1
+      else:
+        # When player guesses incorrectly, they are prompted to try again
+        print('Not quite. Try again.')
+        sentence_play(level)
+    #all_answers_correct()
+    #start_game()
 
 def correct_answer(level, blank_number, answer):
     """Validates user response against answers array
@@ -79,29 +78,9 @@ def correct_answer(level, blank_number, answer):
     Returns:
         boolean: Returns true if answer is correct
     """
-    if str(answer) == answers[level - 1][blank_number - 1]:
-        return True
-    else:
-        return False
+    return str(answer) == answers[level][blank_number - 1]
 
-def all_answers_correct(level, answer):
-    for word in answers:
-        if correct_answer(level, word, answer):
-            print("Congrats! You got them all right!")
-    
-def display_blank_sentence(level):
-    """Validates user response against answers array
-    Args:
-        level (int): level selectd by user
-    Returns:
-        boolean: Returns true if answer is correct
-    """
-    try:
-      print(sentences[level])
-    except IndexError:
-      print("requires integer between one and three")
-
-def display_filled_sentence(level, position, blank_input):
+def display_filled_sentence(level, position):
     """Displays the sentence as the user fills it in
     Args:
         level (int): level selected by user
@@ -110,16 +89,15 @@ def display_filled_sentence(level, position, blank_input):
     Returns:
         Does not return anything
     """
-    sentence = sentences[level - 1]
+    sentence = sentences[level]
     sentence.split(' ')
     for word in sentence:
         if word == '_' + str(position) + '_':
-            word = blank_input
+            word = answers[position]
     sentence = ''.join(sentence)
     print(sentence)
 
-
-def play_game():
+def start_game():
     """Prompts user and plays through game
     Args:
         None
@@ -133,10 +111,11 @@ def play_game():
         # Immediately after running the program, user is prompted
         # to select a difficulty level from easy / medium / hard
         level = level_selector()
-        display_blank_sentence(level)
+        print(sentences[level])
         sentence_play(level) # user attempts to fill in blanks
-        play_game() # game starts over
+        quit_game = input('Enter "Q" to quit\n>>')
+        start_game() # game starts over
     else:
         quit()
 
-play_game() # game play starts when file is run
+start_game() # game play starts when file is run
