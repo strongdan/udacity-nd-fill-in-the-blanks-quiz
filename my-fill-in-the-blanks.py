@@ -15,17 +15,16 @@ def level_selector():
     Returns:
         string: Returns position of level within sentences array
     """
-    level = input("Please enter a number to choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ")
+    level = input("Please choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ")
     while True:
         try:
-            level = int(level)
-            if level == 1:
+            if level == 'Easy' or 'easy':
                 print('Level is: Easy')
                 return level - 1
-            elif level == 2:
+            elif level == 'Medium' or 'medium':
                 print('Level is: Medium')
                 return level - 1
-            elif level == 3:
+            elif level == 'Hard' or 'hard':
                 print('Level is: Hard')
                 return level - 1
             else:
