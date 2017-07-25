@@ -15,7 +15,7 @@ def level_selector():
     Returns:
         string: Returns position of level within sentences array
     """
-    level = input("Please select a level to begin at: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ")
+    level = input("Please enter a number to choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ")
     while True:
         try:
             level = int(level)
