@@ -15,23 +15,24 @@ def level_selector():
     Returns:
         string: Returns position of level within sentences array
     """
-    level = input("Please choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ")
+    level = input("Please enter a number to choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ")
     while True:
         try:
-            if level == 'Easy' or 'easy':
+            level = int(level)
+            if level == 1:
                 print('Level is: Easy')
-                return 0
-            elif level == 'Medium' or 'medium':
+                return level - 1
+            elif level == 2:
                 print('Level is: Medium')
-                return 1
-            elif level == 'Hard' or 'hard':
+                return level - 1
+            elif level == 3:
                 print('Level is: Hard')
-                return 2
+                return level - 1
             else:
-                print("Invalid input") # catches inputs that except doesn't
+                print("Please enter a valid number") # catches inputs that except doesn't
                 level_selector()
         except ValueError: # catches any incorrect inputs not caught above
-            print("Invalid input")
+            print("Invalid input. Please enter a whole number.")
             level_selector()
 
 def sentence_play(level):
@@ -50,7 +51,7 @@ def sentence_play(level):
       elif blank_position == 3:
         blank = 'third'
       else:
-        blank_position = 'fourth'
+        blank = 'fourth'
       blank_input = input("What should be substituted in for the " + blank + " blank?\n>> ")
       if correct_answer(level, blank_position, blank_input):
              # When player guesses correctly, new prompt shows with correct answer in the
@@ -61,6 +62,7 @@ def sentence_play(level):
         print("Nice work! You got that one. Now on to the next blank...")
         display_filled_sentence(level, blank_position)
         blanks_filled += 1
+        blank_position += 1
       else:
         # When player guesses incorrectly, they are prompted to try again
         print('Not quite. Try again.')
