@@ -43,6 +43,7 @@ def sentence_play(level):
         Does not return anything
     """
     blank_position = 1
+    blanks_filled = 0
     while blanks_filled < 5:
       if blank_position == 1:
         blank = 'first'
