@@ -58,8 +58,8 @@ def sentence_play(level, blank_position=1):
              # previous blank and a new prompt for the next blank
         if blank_position >= 4:
           print("Great! You got them all correct")
-          break
-        print("Nice work! You got that one. Now on to the next blank...")
+          start_game()
+        print("Nice work! You got that one. Now on to the next question...")
         display_filled_sentence(level, blank_position)
         blanks_filled += 1
         blank_position += 1
