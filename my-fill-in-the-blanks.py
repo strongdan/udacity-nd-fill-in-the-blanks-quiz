@@ -35,14 +35,13 @@ def level_selector():
             print("Invalid input. Please enter a whole number.")
             level_selector()
 
-def sentence_play(level):
+def sentence_play(level, blank_position=1):
     """Allows user to enter selection and validates user response
     Args:
         level (int): level selected by user
     Returns:
         Does not return anything
     """
-    blank_position = 1
     blanks_filled = 0
     while blanks_filled < 5:
       if blank_position == 1:
@@ -67,7 +66,7 @@ def sentence_play(level):
       else:
         # When player guesses incorrectly, they are prompted to try again
         print('Not quite. Try again.')
-        sentence_play(level)
+        sentence_play(level, blank_position)
     #all_answers_correct()
     #start_game()
 
