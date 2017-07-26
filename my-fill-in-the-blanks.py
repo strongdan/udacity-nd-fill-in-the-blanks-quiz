@@ -15,16 +15,16 @@ def level_selector():
     Returns:
         string: Returns position of level within sentences array
     """
-    level = input("Please choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ").lower()
+    level = input("Please choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ")
     while True:
         try:
-            if level == 'easy':
+            if level == 'Easy' or 'easy':
                 print('Level is: Easy')
                 return 0
-            elif level == 'medium':
+            elif level == 'Medium' or 'medium':
                 print('Level is: Medium')
                 return 1
-            elif level == 'hard':
+            elif level == 'Hard' or 'hard':
                 print('Level is: Hard')
                 return 2
             else:
@@ -41,26 +41,26 @@ def sentence_play(level):
     Returns:
         Does not return anything
     """
-    i = 1
-    while i < 5:
-      if i == 1:
+    blank_position = 1
+    while blanks_filled < 5:
+      if blank_position == 1:
         blank = 'first'
-      elif i == 2:
+      elif blank_position == 2:
         blank = 'second'
-      elif i == 3:
+      elif blank_position == 3:
         blank = 'third'
       else:
-        blank = 'fourth'
+        blank_position = 'fourth'
       blank_input = input("What should be substituted in for the " + blank + " blank?\n>> ")
-      if correct_answer(level, i, blank_input):
+      if correct_answer(level, blank_position, blank_input):
              # When player guesses correctly, new prompt shows with correct answer in the
              # previous blank and a new prompt for the next blank
-        if i >= 4:
+        if blank_position >= 4:
           print("Great! You got them all correct")
           break
         print("Nice work! You got that one. Now on to the next blank...")
-        display_filled_sentence(level, i)
-        i += 1
+        display_filled_sentence(level, blank_position)
+        blanks_filled += 1
       else:
         # When player guesses incorrectly, they are prompted to try again
         print('Not quite. Try again.')
