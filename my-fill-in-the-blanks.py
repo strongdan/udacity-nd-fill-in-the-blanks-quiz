@@ -92,11 +92,9 @@ def display_filled_sentence(level, position):
     """
     sentence = sentences[level]
     sentence.split(' ')
-    while insertion <= position:
-        for word in sentence:
-            if word == '_' + str(position) + '_':
-                word = answers[level][position]
-                insertion += 1
+    for word in sentence:
+        if word == '_' + str(position) + '_':
+            word = answers[position]
     sentence = ''.join(sentence)
     print(sentence)
 
