@@ -16,7 +16,7 @@ def level_selector():
         string: Returns position of level within sentences array
     """
     level = input("Please choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ").lower()
-    while True:
+    while level != 'q':
         try:
             if level == 'easy':
                 print('Level is: Easy')
