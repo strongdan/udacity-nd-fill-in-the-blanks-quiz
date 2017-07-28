@@ -13,7 +13,7 @@ def level_selector():
     Args:
         None
     Returns:
-        integer: Returns position of level within sentences array
+        level (int): Returns position of sentence in sentences depending on level chosen
     """
     level = input("Please choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ").lower()
     while level != 'q':
