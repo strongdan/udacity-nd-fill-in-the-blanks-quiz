@@ -13,7 +13,7 @@ def level_selector():
     Args:
         None
     Returns:
-        string: Returns position of level within sentences array
+        integer: Returns position of level within sentences array
     """
     level = input("Please choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ").lower()
     while level != 'q':
@@ -33,6 +33,7 @@ def level_selector():
         except ValueError: # catches any incorrect inputs not caught above
             print("Invalid input. Please enter a whole number.")
             level_selector()
+    start_game()
 
 def sentence_play(level, blank_position=1):
     """Allows user to enter selection and validates user response
@@ -91,9 +92,11 @@ def display_filled_sentence(level, position):
     """
     sentence = sentences[level]
     sentence.split(' ')
-    for word in sentence:
-        if word == '_' + str(position) + '_':
-            word = answers[position]
+    while insertion <= position:
+        for word in sentence:
+            if word == '_' + str(position) + '_':
+                word = answers[level][position]
+                insertion += 1
     sentence = ''.join(sentence)
     print(sentence)
 
