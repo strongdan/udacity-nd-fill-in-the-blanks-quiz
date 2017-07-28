@@ -86,16 +86,18 @@ def display_filled_sentence(level, position):
     Args:
         level (int): level selected by user
         position (int): position of blank within sentence
-        blank_input (string): user answer for blank
     Returns:
         Does not return anything
     """
-    sentence = sentences[level]
-    sentence.split(' ')
-    for word in sentence:
-        if word == '_' + str(position) + '_':
-            word = answers[position]
-    sentence = ''.join(sentence)
+    sentence = sentences[level].split(' ')
+    replacement_position = 1
+    while replacement_position <= position:
+      for word in sentence:
+          if word == '_' + str(replacement_position) + '_':
+              word = answers[level][replacement_position - 1]
+              print(word)
+              replacement_position += 1
+    sentence = ' '.join(sentence)
     print(sentence)
 
 def start_game():
