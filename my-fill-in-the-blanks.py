@@ -94,7 +94,7 @@ def display_filled_sentence(level, position):
     while replacement_position <= position:
       for word in sentence:
           if word == '_' + str(replacement_position) + '_':
-              word = answers[level][replacement_position - 1]
+              sentence[replacement_position] = sentence[replacement_position].replace(word, answers[level][replacement_position - 1])
               replacement_position += 1
     sentence = ' '.join(sentence)
     print(sentence)
