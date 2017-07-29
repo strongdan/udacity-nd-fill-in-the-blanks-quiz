@@ -40,14 +40,17 @@ def sentence_play(level, blank_position=1):
     """
     blanks_filled = 0
     while blanks_filled <= 4:
-      blank_input = input("\nWhat should be substituted in for _" + str(blanks_filled + 1) + "_?\n>> ")
+      blank_input = input("\nWhat should be substituted in for _" + str(blanks_filled + 1) + "_?\n>>")
       if correct_answer(level, blank_position, blank_input):
              # When player guesses correctly, new prompt shows with correct answer in the previous blank and a new prompt for the next blank
         if blank_position >= 4:
-          print("\nGreat! You got them all correct. Returning to the start.")
+          print("\nGreat! You got them all correct:\n")
+          display_filled_sentence(level, blank_position)
+          print("\nReturning to the start...")
           start_game()
-        print("\nNice work! You got that one. Now on to the next question...")
+        print("\nNice work! You got that one.")
         display_filled_sentence(level, blank_position)
+        print("\nNow on to the next question...")
         blanks_filled += 1
         blank_position += 1
       else:
