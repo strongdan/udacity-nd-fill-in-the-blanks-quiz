@@ -16,20 +16,21 @@ def level_selector():
         level (int): Returns position of sentence in sentences depending on level chosen
     """
     level = input("Please choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ").lower()
-    while level != 'q':
-            if level == 'easy' or level == '1':
-                print('Level is: Easy')
-                return 0
-            elif level == 'medium' or level == '2':
-                print('Level is: Medium')
-                return 1
-            elif level == 'hard' or level == '3':
-                print('Level is: Hard')
-                return 2
-            else:
-                print("Please enter a valid input") # catches invalid inputs
-                level_selector()
-    start_game()
+    if level == 'q' or level == 'Q':
+      quit()
+    else:
+      if level == 'easy' or level == '1':
+        print('Level is: Easy')
+        return 0
+      elif level == 'medium' or level == '2':
+        print('Level is: Medium')
+        return 1
+      elif level == 'hard' or level == '3':
+        print('Level is: Hard')
+        return 2
+      else:
+        print("Please enter a valid input") # catches invalid inputs
+        level_selector()
 
 def sentence_play(level, blank_position=1):
     """Allows user to enter selection and validates user response
@@ -69,7 +70,7 @@ def correct_answer(level, blank_number, answer):
     Returns:
         boolean: Returns true if answer is correct
     """
-    return str(answer).lower() == answers[level][blank_number - 1].lower()
+    return str(answer).lower().strip() == answers[level][blank_number - 1].lower()
 
 def display_filled_sentence(level, position):
     """Displays the sentence as the user fills it in
@@ -81,6 +82,7 @@ def display_filled_sentence(level, position):
     """
     #sentence = sentences[level].split(' ')
     replacement_position = 1
+    sentence = sentences
     while replacement_position <= position:
       sentences[level] = sentences[level].replace('_' + str(replacement_position) + '_', answers[level][replacement_position - 1])
       replacement_position += 1
@@ -95,14 +97,12 @@ def start_game():
     """
     # Start game with a prompt to the user
     print("Welcome to the fill-in-the-blanks quiz")
-    quit_game = ''
-    while quit_game != 'Q' or 'q':
+    while True:
         # Immediately after running the program, user is prompted
         # to select a difficulty level from easy / medium / hard
         level = level_selector()
         print(sentences[level])
         sentence_play(level) # user attempts to fill in blanks
-        quit_game = input('Enter "Q" to quit\n>>')
         start_game() # game starts over
     else:
         quit()
