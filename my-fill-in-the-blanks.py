@@ -1,8 +1,8 @@
 # Game has 3 or more levels and each level contains 4 or more blanks to fill in
 sentences = [
-"_1_ is a programming language named for Monty Python's Flying Circus.\nA _2_ is an immutable list of characters surrounded by quotes.\nA _3_ is an unordered collection of items of any type while a\n_4_ is an ordered collection of a single type.",
-"A _1_ is an associative array that can contain any Python _2_ type.\nThe print() function and integer division are key differences between Python _3_ and _4_",
-"Python supports _1_ programming with classes and multiple _2_.\nPython _3_ are defined by creating a function and inheriting from a _4_\neg. variable = Class(parameters)"]
+"_1_ is a programming language named for Monty Python's Flying Circus. A _2_ is an immutable list of characters surrounded by quotes. A _3_ is an unordered collection of items of any type while a _4_ is an ordered collection of a single type.",
+"A _1_ is an associative array that can contain any Python _2_ type. The print() function and integer division are key differences between Python _3_ and _4_",
+"Python supports _1_ programming with classes and multiple _2_. Python _3_ are defined by creating a function and inheriting from a _4_ eg. variable = Class(parameters)"]
 
 answers = [['Python','string','list','array'],['dictionary', 'data', '2', '3'],['object-oriented', 'inheritance','objects','class']]
 
@@ -17,22 +17,18 @@ def level_selector():
     """
     level = input("Please choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ").lower()
     while level != 'q':
-        try:
-            if level == 'easy':
+            if level == 'easy' or 1:
                 print('Level is: Easy')
                 return 0
-            elif level == 'medium':
+            elif level == 'medium' or 2:
                 print('Level is: Medium')
                 return 1
-            elif level == 'hard':
+            elif level == 'hard' or 3:
                 print('Level is: Hard')
                 return 2
             else:
                 print("Please enter a valid input") # catches inputs that except doesn't
                 level_selector()
-        except ValueError: # catches any incorrect inputs not caught above
-            print("Invalid input. Please enter a whole number.")
-            level_selector()
     start_game()
 
 def sentence_play(level, blank_position=1):
@@ -43,23 +39,16 @@ def sentence_play(level, blank_position=1):
         Does not return anything
     """
     blanks_filled = 0
+    # = input("What should be substituted for " + str(blanks_filled+1))
     while blanks_filled < 5:
-      if blank_position == 1:
-        blank = 'first'
-      elif blank_position == 2:
-        blank = 'second'
-      elif blank_position == 3:
-        blank = 'third'
-      else:
-        blank = 'fourth'
-      blank_input = input("What should be substituted in for the " + blank + " blank?\n>> ")
+      blank_input = input("\nWhat should be substituted in for _" + str(blanks_filled + 1) + "_?\n>> ")
       if correct_answer(level, blank_position, blank_input):
              # When player guesses correctly, new prompt shows with correct answer in the
              # previous blank and a new prompt for the next blank
         if blank_position >= 4:
-          print("Great! You got them all correct")
+          print("\nGreat! You got them all correct. Returning to the start.")
           start_game()
-        print("Nice work! You got that one. Now on to the next question...")
+        print("\nNice work! You got that one. Now on to the next question...")
         display_filled_sentence(level, blank_position)
         blanks_filled += 1
         blank_position += 1
