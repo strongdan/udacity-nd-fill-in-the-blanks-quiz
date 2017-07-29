@@ -41,7 +41,7 @@ def sentence_play(level, blank_position=1):
     """
     blanks_filled = 0
     while blanks_filled <= 4:
-      blank_input = input("\nWhat should be substituted for _" + str(blanks_filled + 1) + "_?\n>>")
+      blank_input = input("\nWhat should be substituted in for _" + str(blanks_filled + 1) + "_?\n>>")
       if correct_answer(level, blank_position, blank_input):
              # When player guesses correctly, new prompt shows with correct answer in the previous blank and a new prompt for the next blank
         if blank_position >= 4:
@@ -54,9 +54,12 @@ def sentence_play(level, blank_position=1):
         print("\nNow on to the next question...")
         blanks_filled += 1
         blank_position += 1
-      else: # When player guesses incorrectly, they are prompted to try again
+      else:
+        # When player guesses incorrectly, they are prompted to try again
         print('Not quite. Try again.')
         sentence_play(level, blank_position)
+    #all_answers_correct()
+    #start_game()
 
 def correct_answer(level, blank_number, answer):
     """Validates user response against answers array
