@@ -17,17 +17,17 @@ def level_selector():
     """
     level = input("Please choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ").lower()
     while level != 'q':
-            if level == 'easy' or 1:
+            if level == 'easy' or level == '1':
                 print('Level is: Easy')
                 return 0
-            elif level == 'medium' or 2:
+            elif level == 'medium' or level == '2':
                 print('Level is: Medium')
                 return 1
-            elif level == 'hard' or 3:
+            elif level == 'hard' or level == '3':
                 print('Level is: Hard')
                 return 2
             else:
-                print("Please enter a valid input") # catches inputs that except doesn't
+                print("Please enter a valid input") # catches invalid inputs
                 level_selector()
     start_game()
 
@@ -39,12 +39,10 @@ def sentence_play(level, blank_position=1):
         Does not return anything
     """
     blanks_filled = 0
-    # = input("What should be substituted for " + str(blanks_filled+1))
-    while blanks_filled < 5:
+    while blanks_filled <= 4:
       blank_input = input("\nWhat should be substituted in for _" + str(blanks_filled + 1) + "_?\n>> ")
       if correct_answer(level, blank_position, blank_input):
-             # When player guesses correctly, new prompt shows with correct answer in the
-             # previous blank and a new prompt for the next blank
+             # When player guesses correctly, new prompt shows with correct answer in the previous blank and a new prompt for the next blank
         if blank_position >= 4:
           print("\nGreat! You got them all correct. Returning to the start.")
           start_game()
@@ -68,7 +66,7 @@ def correct_answer(level, blank_number, answer):
     Returns:
         boolean: Returns true if answer is correct
     """
-    return str(answer) == answers[level][blank_number - 1]
+    return str(answer).lower() == answers[level][blank_number - 1].lower()
 
 def display_filled_sentence(level, position):
     """Displays the sentence as the user fills it in
@@ -78,15 +76,12 @@ def display_filled_sentence(level, position):
     Returns:
         Does not return anything
     """
-    sentence = sentences[level].split(' ')
+    #sentence = sentences[level].split(' ')
     replacement_position = 1
     while replacement_position <= position:
-      for word in sentence:
-          if word == '_' + str(replacement_position) + '_':
-              sentence[replacement_position] = sentence[replacement_position].replace(word, answers[level][replacement_position - 1])
-              replacement_position += 1
-    sentence = ' '.join(sentence)
-    print(sentence)
+      sentences[level] = sentences[level].replace('_' + str(replacement_position) + '_', answers[level][replacement_position - 1])
+      replacement_position += 1
+    print(sentences[level])
 
 def start_game():
     """Prompts user and plays through game
