@@ -54,12 +54,9 @@ def sentence_play(level, blank_position=1):
         print("\nNow on to the next question...")
         blanks_filled += 1
         blank_position += 1
-      else:
-        # When player guesses incorrectly, they are prompted to try again
+      else: # When player guesses incorrectly, they are prompted to try again
         print('Not quite. Try again.')
         sentence_play(level, blank_position)
-    #all_answers_correct()
-    #start_game()
 
 def correct_answer(level, blank_number, answer):
     """Validates user response against answers array
