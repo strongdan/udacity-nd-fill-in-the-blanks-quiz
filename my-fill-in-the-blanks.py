@@ -33,35 +33,33 @@ def level_selector():
       else:
         print("Please enter a valid input") # catches invalid inputs
         level_selector()
-
-def sentence_play(level, blank_position=1, blanks_filled=0):
+        
+def sentence_play(level, blank_position=1):
     """Allows user to enter selection and validates user response
     Args:
         level (int): level selected by user
         blank_position (int): position of blanks within sentence, default is first blank
-        blanks_filled (int): number of blanks already filled, default is zero (no blanks filled)
     Returns:
         Does not return anything
     """
     total_blanks = 4
-    while blanks_filled <= total_blanks:
-      blank_input = input("\nWhat should be substituted in for _" + str(blanks_filled + 1) + "_?\n>>")
+    while blank_position <= total_blanks:
+      blank_input = input("\nWhat should be substituted in for _" + str(blank_position) + "_?\n>>")
       if correct_answer(level, blank_position, blank_input):
-        # When player guesses correctly, new prompt shows with correct answer in the previous blank 
-        # and a new prompt for the next blank
-        if blanks_filled >= total_blanks:
+      # When player guesses correctly, new prompt shows with correct answer in the previous blank and a new prompt for the next blank
+        if blank_position >= total_blanks:
           print("\nGreat! You got them all correct:\n")
-          display_filled_sentence(level, blanks_filled)
+          display_filled_sentence(level, blank_position)
           print("\nReturning to the start...")
           start_game()
         print("\nNice work! You got that one.")
-        display_filled_sentence(level, blanks_filled)
+        display_filled_sentence(level, blank_position)
         print("\nNow on to the next question...")
-        blanks_filled += 1
+        blank_position += 1
       else:
         # When player guesses incorrectly, they are prompted to try again
         print('Not quite. Try again.')
-        sentence_play(level, blank_position, blanks_filled)
+        sentence_play(level, blank_position)
 
 def correct_answer(level, blank_number, answer):
     """Validates user response against answers array
