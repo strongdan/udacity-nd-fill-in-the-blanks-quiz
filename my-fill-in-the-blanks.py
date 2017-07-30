@@ -38,6 +38,8 @@ def sentence_play(level, blank_position=1, blanks_filled=0):
     """Allows user to enter selection and validates user response
     Args:
         level (int): level selected by user
+        blank_position (int): position of blanks within sentence
+        blanks_filled (int): number of blanks already filled
     Returns:
         Does not return anything
     """
