@@ -18,16 +18,16 @@ def level_selector():
         level (int): Returns position of sentence in sentences depending on level chosen
     """
     level = str(input("Please choose a level: (1) Easy (2) Medium or (3) Hard. Type 'Q' to quit\n>> ")).lower()
-    if level == 'q' or level == 'Q':
+    if level in ['q', 'Q']:
       quit()
     else:
-      if level == 'easy' or level == '1':
+      if level in ['easy', '1']:
         print('Level is: Easy')
         return 0
-      elif level == 'medium' or level == '2':
+      elif level in ['medium','2']:
         print('Level is: Medium')
         return 1
-      elif level == 'hard' or level == '3':
+      elif level in ['hard', '3']:
         print('Level is: Hard')
         return 2
       else:
