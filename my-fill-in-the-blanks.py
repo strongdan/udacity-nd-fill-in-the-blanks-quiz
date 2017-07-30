@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Game has 3 or more levels and each level contains 4 or more blanks to fill in
 sentences = [
 "_1_ is a programming language named for Monty Python's Flying Circus. A _2_ is an immutable list of characters surrounded by quotes. A _3_ is an unordered collection of items of any type while a _4_ is an ordered collection of a single type.",
@@ -32,14 +34,13 @@ def level_selector():
         print("Please enter a valid input") # catches invalid inputs
         level_selector()
 
-def sentence_play(level, blank_position=1):
+def sentence_play(level, blank_position=1, blanks_filled=0):
     """Allows user to enter selection and validates user response
     Args:
         level (int): level selected by user
     Returns:
         Does not return anything
     """
-    blanks_filled = 0
     while blanks_filled <= 4:
       blank_input = input("\nWhat should be substituted in for _" + str(blanks_filled + 1) + "_?\n>>")
       if correct_answer(level, blank_position, blank_input):
@@ -57,9 +58,7 @@ def sentence_play(level, blank_position=1):
       else:
         # When player guesses incorrectly, they are prompted to try again
         print('Not quite. Try again.')
-        sentence_play(level, blank_position)
-    #all_answers_correct()
-    #start_game()
+        sentence_play(level, blank_position, blanks_filled)
 
 def correct_answer(level, blank_number, answer):
     """Validates user response against answers array
